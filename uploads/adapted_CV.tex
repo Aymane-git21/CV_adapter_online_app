@@ -1,0 +1,137 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel} % Changed to French
+\usepackage[left=1.5cm, right=1.5cm, top=1.5cm, bottom=1.5cm]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{fontawesome5}
+\usepackage{xcolor}
+
+% --- Colors and Style ---
+\definecolor{darkblue}{RGB}{0,32,96} % Adjusted to a darker blue (Airbus style)
+\definecolor{graytext}{RGB}{80,80,80}
+
+% --- Section Configuration ---
+\titleformat{\section}
+  {\large\bfseries\color{darkblue}\uppercase}
+  {}{0em}
+  {}[\titlerule]
+\titlespacing{\section}{0pt}{10pt}{5pt}
+
+\titleformat{\subsection}
+  {\bfseries\color{black}}
+  {}{0em}
+  {}
+
+% --- Custom Commands ---
+\newcommand{\entry}[4]{
+  \noindent\textbf{#1} \hfill \textit{#2} \\
+  \textit{#3} \hfill #4 \\
+}
+
+\begin{document}
+\pagestyle{empty}
+
+% --- Header ---
+\begin{center}
+    {\Huge \textbf{Aymane Merbouh}} \\ [5pt]
+    % MODIFIED TITLE to match JD keywords (DevOps, Dev Engineer, AI focus over Unity)
+    {\Large Étudiant Master 2 | Ingénieur Développement, DevOps \& Intégration IA} \\ [5pt]
+    \small
+    \faMapMarker Valenciennes / Paris, France \quad
+    \faPhone \ +33 6 60 68 67 20 \quad
+    \faEnvelope \ \href{mailto:aymanemerbouh03@gmail.com}{aymanemerbouh03@gmail.com} \\
+    \faLinkedin \ \href{https://linkedin.com/in/aymane-merbouh}{linkedin.com/in/aymane-merbouh} \quad
+    \faGithub \ \href{https://github.com/Aymane-git21}{Aymane-git21}
+\end{center}
+
+% --- Profile ---
+% MODIFIED SECTION to highlight Java, DevOps interest, AI curiosity and general software dev passion instead of Metaverse/XR focus.
+\section{Profil}
+Étudiant en Master 2 Informatique, je suis à la recherche d'un stage de 6 mois. Passionné par le développement logiciel et très curieux des nouveaux usages de l'IA, je souhaite intégrer une équipe Agile avec une forte culture \textbf{DevOps}. Fort de compétences académiques en développement (incluant Java et technologies web) et IA, ainsi que d'une première expérience pratique en environnement DevOps, je suis motivé pour contribuer à l'analyse, la conception et l'automatisation de tests sur des applications critiques.
+
+% --- Education ---
+\section{Formation}
+\entry{Master Informatique (Spécialité : Systèmes et Technologies du Métavers)}{2024 -- Présent}{INSA / UPHF Valenciennes}{Valenciennes, France}
+\vspace{-10pt}
+\begin{itemize}[noitemsep, leftmargin=]
+    \vspace{-5pt}
+    \item Modules pertinents : \textbf{Réalité Virtuelle/Augmentée}, Jumeaux Numériques, IA Avancée, Simulation Numérique, Big Data, Développement Web.
+\end{itemize}
+
+\entry{BUT Génie Électrique et Informatique Industrielle (GEII)}{2021 -- 2024}{IUT de l'Aisne}{France}
+\vspace{-10pt}
+\vspace{-5pt}
+\begin{itemize}[noitemsep, leftmargin=]
+    \item \small Compétences clés : Informatique Industrielle (C/C++), Automatisme, Systèmes Embarqués.
+\end{itemize}
+
+% --- Technical Skills (Moved up for visibility) ---
+\section{Compétences Techniques}
+\begin{itemize}[noitemsep, leftmargin=]
+    \item \textbf{AR/VR \& Développement :} Unity 3D, C\# , Blender, UI/UX pour la XR.
+    \item \textbf{Langages :} C\#, Python, C++, Java, JavaScript (Node.js), Dart (Flutter).
+    \item \textbf{Vision par Ordinateur \& IA :} PyTorch, OpenCV, Reconnaissance d'objets, Entraînement de modèles.
+\end{itemize}
+
+% --- Academic Projects ---
+\section{Projets Académiques}
+\begin{itemize}[noitemsep, leftmargin=]
+    \item \textbf{Développement 3D/VR Avancé (Unity, C\#) :} Conception et développement d'une simulation 3D immersive incluant une logique de combat complexe, une IA ennemie personnalisée et des environnements interactifs. Accent mis sur la performance temps réel et l'expérience utilisateur (UX).
+    \item \textbf{Vision par Ordinateur (PyTorch) :} Implémentation d'un réseau de neurones pour la reconnaissance de chiffres manuscrits. Pertinent pour le suivi AR et la reconnaissance de motifs.
+    \item \textbf{Cryptomonnaie Personnalisée (Python / Web3) :} Création d'un jeton blockchain avec interface web (FastAPI), démontrant la capacité à construire des applications sécurisées full-stack.
+    \item \textbf{Traitement Big Data (Hadoop / MapReduce) :} Analyse de grands ensembles de données, gestion des contraintes de calcul et optimisation.
+\end{itemize}
+
+% --- Professional Experience ---
+\section{Expérience Professionnelle}
+
+\entry{Développeur Freelance}{2023 -- Présent}{Auto-entrepreneur}{Télétravail}
+\begin{itemize}[noitemsep, topsep=0pt, leftmargin=]
+\vspace{-10pt}
+    \item Développement Mobile : Création d'applications multiplateformes avec Flutter et C\#.
+    \item Capacité démontrée à s'adapter aux besoins utilisateurs et à livrer des solutions logicielles fonctionnelles dans les délais.
+\end{itemize}
+\vspace{3pt}
+
+\entry{Stagiaire Recherche IA–VR}{Mars -- Août 2024}{UM6P School of Collective Intelligence}{Maroc}
+\begin{itemize}[noitemsep, topsep=0pt, leftmargin=] 
+\vspace{-10pt}
+    \item Intégration de modules IA (NLP + analyse comportementale) pour analyser la parole, les interactions et l'engagement lors de sessions de groupe.
+    \item Implémentation de tableaux de bord VR en temps réel visualisant des métriques d'intelligence collective.
+\end{itemize}
+
+\vspace{3pt}
+\entry{Stagiaire DevOps}{Avril 2023  Juin 2023}{E cube Technology}{Soissons France}
+\begin{itemize}[noitemsep, topsep=0pt, leftmargin=]
+\vspace{-10pt}
+    \item Développement et maintenance du site web de l entreprise en HTML CSS JS
+    \item Mise en place d automatisations simples pour faciliter les mises a jour et le déploiement du site
+\end{itemize}
+
+
+% --- Languages and Interests ---
+\section{Langues et Centres d'Intérêt}
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+    \textbf{Langues :}
+    \begin{itemize}[noitemsep, leftmargin=]
+        \item \textbf{Anglais :} Courant (C1/C2)
+        \item \textbf{Français :} Courant (C1/C2)
+        \item \textbf{Arabe :} Langue maternelle
+        \item \textbf{Russe :} Notions de base
+    \end{itemize}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+    \textbf{Centres d'intérêt :}
+    \begin{itemize}[noitemsep, leftmargin=]
+        \item {Dév. de Jeux Vidéo} (Unity/Unreal)
+        \item Esport : Joueur semi-pro (équipe INSA)
+        \item Taekwondo, Musculation
+    \end{itemize}
+\end{minipage}
+
+\end{document}
