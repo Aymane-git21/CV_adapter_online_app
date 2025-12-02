@@ -1,4 +1,4 @@
-# CV_adapter_internship_getter_v2000
+# CV_adapter_internship_getter_unemployement_finisher_v2000
 
 tired of getting rejected by your dream jobs and internships because your CV is “too much”?
 yeah. same.
