@@ -1,6 +1,6 @@
 import os
 import app
-from app import adapt_cv_with_gemini, compile_latex
+from app import adapt_cv_with_gemini, compile_latex, generate_cover_letter, generate_short_message
 
 # Job Description provided by the user
 job_description = """
@@ -43,21 +43,28 @@ def main():
     with open(file_path, 'r', encoding='utf-8') as f:
         tex_content = f.read()
     
-    # 2. Adapt with Gemini
+    # 1.5 Read Master CV
+    master_cv_path = os.path.abspath('master_cv.md')
+    print(f"Reading {master_cv_path}...")
+    if os.path.exists(master_cv_path):
+        with open(master_cv_path, 'r', encoding='utf-8') as f:
+            master_cv_content = f.read()
+    else:
+        print("Warning: master_cv.md not found.")
+        master_cv_content = ""
+
+    # 2. Adapt CV with Gemini
     print("Adapting CV with Gemini (this may take a few seconds)...")
     try:
-        adapted_tex_content = adapt_cv_with_gemini(tex_content, job_description)
+        adapted_tex_content = adapt_cv_with_gemini(tex_content, job_description, master_cv_content)
     except Exception as e:
         print(f"Error during Gemini adaptation: {e}")
         return
 
     # Clean up markdown code blocks if Gemini adds them
-    if adapted_tex_content.startswith("```latex"):
-        adapted_tex_content = adapted_tex_content[8:]
-    if adapted_tex_content.startswith("```"):
-        adapted_tex_content = adapted_tex_content[3:]
-    if adapted_tex_content.endswith("```"):
-        adapted_tex_content = adapted_tex_content[:-3]
+    if adapted_tex_content.startswith("```latex"): adapted_tex_content = adapted_tex_content[8:]
+    if adapted_tex_content.startswith("```"): adapted_tex_content = adapted_tex_content[3:]
+    if adapted_tex_content.endswith("```"): adapted_tex_content = adapted_tex_content[:-3]
     
     # Save adapted version
     adapted_filename = f"adapted_{cv_filename}"
@@ -67,13 +74,50 @@ def main():
     with open(adapted_file_path, 'w', encoding='utf-8') as f:
         f.write(adapted_tex_content)
     
-    # 3. Compile to PDF
-    print("Compiling to PDF...")
+    # 3. Compile CV to PDF
+    print("Compiling CV to PDF...")
     try:
         pdf_path = compile_latex(adapted_file_path, app.app.config['OUTPUT_FOLDER'])
-        print(f"Success! PDF generated at: {pdf_path}")
+        print(f"Success! CV PDF generated at: {pdf_path}")
     except Exception as e:
-        print(f"Error during compilation: {e}")
+        print(f"Error during CV compilation: {e}")
+
+    # 4. Generate Cover Letter
+    print("Generating Cover Letter...")
+    try:
+        cover_letter_tex = generate_cover_letter(job_description, master_cv_content)
+        
+        if cover_letter_tex.startswith("```latex"): cover_letter_tex = cover_letter_tex[8:]
+        if cover_letter_tex.startswith("```"): cover_letter_tex = cover_letter_tex[3:]
+        if cover_letter_tex.endswith("```"): cover_letter_tex = cover_letter_tex[:-3]
+
+        cl_filename = "Cover_Letter.tex"
+        cl_file_path = os.path.join(app.app.config['UPLOAD_FOLDER'], cl_filename)
+        
+        print(f"Saving Cover Letter LaTeX to {cl_file_path}...")
+        with open(cl_file_path, 'w', encoding='utf-8') as f:
+            f.write(cover_letter_tex)
+            
+        cl_pdf_path = compile_latex(cl_file_path, app.app.config['OUTPUT_FOLDER'])
+        print(f"Success! Cover Letter PDF generated at: {cl_pdf_path}")
+    except Exception as e:
+        print(f"Error during Cover Letter generation: {e}")
+
+    # 5. Generate Short Message
+    print("Generating Short Message...")
+    try:
+        short_message = generate_short_message(job_description, master_cv_content)
+        msg_filename = "short_message.txt"
+        msg_file_path = os.path.join(app.app.config['OUTPUT_FOLDER'], msg_filename)
+        
+        with open(msg_file_path, 'w', encoding='utf-8') as f:
+            f.write(short_message)
+        print(f"Success! Short message saved to: {msg_file_path}")
+        print("-" * 20)
+        print(short_message)
+        print("-" * 20)
+    except Exception as e:
+        print(f"Error during Short Message generation: {e}")
 
 if __name__ == "__main__":
     main()

@@ -1,34 +1,49 @@
 \documentclass[a4paper,10pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[french]{babel} % Changed to French
-\usepackage[left=1.5cm, right=1.5cm, top=1.5cm, bottom=1.5cm]{geometry}
+\usepackage[french]{babel}
+\usepackage[left=1.2cm, right=1.2cm, top=1.2cm, bottom=1.2cm]{geometry}
 \usepackage{titlesec}
-\usepackage{enumitem}
 \usepackage{hyperref}
 \usepackage{fontawesome5}
 \usepackage{xcolor}
 
-% --- Colors and Style ---
-\definecolor{darkblue}{RGB}{0,32,96} % Adjusted to a darker blue (Airbus style)
-\definecolor{graytext}{RGB}{80,80,80}
+% --- Colors ---
+\definecolor{darkblue}{RGB}{0,32,96}
+\definecolor{linkcolor}{RGB}{0,80,160}
 
-% --- Section Configuration ---
+% --- General Settings ---
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+
+% --- Hyperlinks ---
+\hypersetup{
+    colorlinks=true,
+    linkcolor=linkcolor,
+    urlcolor=linkcolor,
+}
+
+% --- Section Formatting ---
 \titleformat{\section}
   {\large\bfseries\color{darkblue}\uppercase}
   {}{0em}
   {}[\titlerule]
 \titlespacing{\section}{0pt}{10pt}{5pt}
 
-\titleformat{\subsection}
-  {\bfseries\color{black}}
-  {}{0em}
-  {}
-
 % --- Custom Commands ---
 \newcommand{\entry}[4]{
-  \noindent\textbf{#1} \hfill \textit{#2} \\
-  \textit{#3} \hfill #4 \\
+  \vspace{2pt}
+  \noindent
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lr}
+    \textbf{#1} & \textit{#2} \\
+    \textit{#3} & \small #4 \\
+  \end{tabular*}
+  \vspace{4pt}
+}
+
+\newcommand{\project}[2]{
+  \textbf{#1} \hfill \textit{\footnotesize #2} \par
+  \vspace{2pt}
 }
 
 \begin{document}
@@ -36,100 +51,71 @@
 
 % --- Header ---
 \begin{center}
-    {\Huge \textbf{Aymane Merbouh}} \\ [5pt]
-    {\Large Étudiant Master 2 | DevOps, Dév.Unity \& Vision par Ordinateur} \\ [5pt]
+    {\Huge \textbf{Aymane Merbouh}} \\[4pt]
+    {\Large Étudiant Master 2 | IA\&RA, Réalité Mixte (AR/VR)} \\[6pt]
     \small
-    \faMapMarker Valenciennes / Paris, France \quad
+    \faMapMarker* \ Valenciennes / Paris \quad
     \faPhone \ +33 6 60 68 67 20 \quad
     \faEnvelope \ \href{mailto:aymanemerbouh03@gmail.com}{aymanemerbouh03@gmail.com} \\
     \faLinkedin \ \href{https://linkedin.com/in/aymane-merbouh}{linkedin.com/in/aymane-merbouh} \quad
-    \faGithub \ \href{https://github.com/Aymane-git21}{Aymane-git21}
+    \faGithub \ \href{https://github.com/Aymane-git21}{github.com/Aymane-git21}
 \end{center}
 
 % --- Profile ---
 \section{Profil}
-Étudiant en Master 2 Informatique spécialisé en \textbf{Systèmes et Technologies du Métavers}. Je possède de solides compétences en programmation C\#, développement Unity et Vision par Ordinateur. Passionné par les technologies immersives, je me concentre sur la création d'applications optimisées pour les environnements de \textbf{Réalité Mixte (XR)}. Désireux de rejoindre votre société pour un stage de 6 mois à partir de mars 2026.
+Étudiant en Master 2 Informatique spécialisé dans les systèmes du métavers. Passionné par l'IA, la VR et la recherche appliquée, je souhaite rejoindre une entreprise ou un laboratoire innovant pour contribuer à des projets technologiques à fort impact.
 
 % --- Education ---
 \section{Formation}
-\entry{Master Informatique (Spécialité : Systèmes et Technologies du Métavers)}{2024 -- Présent}{INSA / UPHF Valenciennes}{Valenciennes, France}
-\vspace{-10pt}
-\begin{itemize}[noitemsep, leftmargin=]
-    \vspace{-5pt}
-    \item Modules pertinents : \textbf{Réalité Virtuelle/Augmentée}, Jumeaux Numériques, IA Avancée, Simulation Numérique, Big Data, Développement Web.
-\end{itemize}
+
+\entry{Master Informatique (Systèmes \& Technologies du Métavers)}{2024 -- Présent}{INSA / UPHF Valenciennes}{Valenciennes, France}
+\textbf{Modules :} Réalité Virtuelle/Augmentée, Jumeaux Numériques, IA, Simulation, Big Data, Web.
 
 \entry{BUT Génie Électrique et Informatique Industrielle (GEII)}{2021 -- 2024}{IUT de l'Aisne}{France}
-\vspace{-10pt}
-\vspace{-5pt}
-\begin{itemize}[noitemsep, leftmargin=]
-    \item \small Compétences clés : Informatique Industrielle (C/C++), Automatisme, Systèmes Embarqués.
-\end{itemize}
+\textbf{Compétences :} Informatique Industrielle (C/C++), Automatisme, Systèmes Embarqués.
 
-% --- Technical Skills (Moved up for visibility) ---
-\section{Compétences Techniques}
-\begin{itemize}[noitemsep, leftmargin=]
-    \item \textbf{AR/VR \& Développement :} Unity 3D, C\# , Blender, UI/UX pour la XR.
-    \item \textbf{Langages :} C\#, Python, C++, Java, JavaScript (Node.js), Dart (Flutter).
-    \item \textbf{Vision par Ordinateur \& IA :} PyTorch, OpenCV, Reconnaissance d'objets, Entraînement de modèles.
-\end{itemize}
-
-% --- Academic Projects ---
-\section{Projets Académiques}
-\begin{itemize}[noitemsep, leftmargin=]
-    \item \textbf{Développement 3D/VR Avancé (Unity, C\#) :} Conception et développement d'une simulation 3D immersive incluant une logique de combat complexe, une IA ennemie personnalisée et des environnements interactifs. Accent mis sur la performance temps réel et l'expérience utilisateur (UX).
-    \item \textbf{Vision par Ordinateur (PyTorch) :} Implémentation d'un réseau de neurones pour la reconnaissance de chiffres manuscrits. Pertinent pour le suivi AR et la reconnaissance de motifs.
-    \item \textbf{Cryptomonnaie Personnalisée (Python / Web3) :} Création d'un jeton blockchain avec interface web (FastAPI), démontrant la capacité à construire des applications sécurisées full-stack.
-    \item \textbf{Traitement Big Data (Hadoop / MapReduce) :} Analyse de grands ensembles de données, gestion des contraintes de calcul et optimisation.
-\end{itemize}
-
-% --- Professional Experience ---
+% --- Experience ---
 \section{Expérience Professionnelle}
 
-\entry{Développeur Freelance}{2023 -- Présent}{Auto-entrepreneur}{Télétravail}
-\begin{itemize}[noitemsep, topsep=0pt, leftmargin=]
-\vspace{-10pt}
-    \item Développement Mobile : Création d'applications multiplateformes avec Flutter et C\#.
-    \item Capacité démontrée à s'adapter aux besoins utilisateurs et à livrer des solutions logicielles fonctionnelles dans les délais.
-\end{itemize}
-\vspace{3pt}
+\entry{Stagiaire Recherche IA \& VR}{Mars -- Août 2024}{UM6P School of Collective Intelligence}{Maroc}
+Intégration de modules IA (NLP + analyse comportementale) pour l'étude d’interactions de groupe.  
+Création de tableaux de bord VR temps réel pour visualiser des métriques d'intelligence collective.
 
-\entry{Stagiaire Recherche IA–VR}{Mars -- Août 2024}{UM6P School of Collective Intelligence}{Maroc}
-\begin{itemize}[noitemsep, topsep=0pt, leftmargin=] 
-\vspace{-10pt}
-    \item Intégration de modules IA (NLP + analyse comportementale) pour analyser la parole, les interactions et l'engagement lors de sessions de groupe.
-    \item Implémentation de tableaux de bord VR en temps réel visualisant des métriques d'intelligence collective.
-\end{itemize}
+\entry{Développeur Freelance}{2023 -- Présent}{Indépendant}{Télétravail}
+Développement d’applications mobiles multiplateformes (Flutter, C\#).  
+Analyse des besoins clients, prototypage et livraison d'applications fonctionnelles.
 
-\vspace{3pt}
-\entry{Stagiaire DevOps}{Avril 2023  Juin 2023}{E cube Technology}{Soissons France}
-\begin{itemize}[noitemsep, topsep=0pt, leftmargin=]
-\vspace{-10pt}
-    \item Développement et maintenance du site web de l entreprise en HTML CSS JS
-    \item Mise en place d automatisations simples pour faciliter les mises a jour et le déploiement du site
-\end{itemize}
+\entry{Stagiaire IT}{Avril -- Juin 2023}{E-cube Technology}{Soissons, France}
+Amélioration d'un système industriel piloté par Raspberry Pi et Node-RED.  
+Développement et maintenance d’interfaces web (HTML/CSS/JS).
 
+% --- Skills ---
+\section{Compétences Techniques}
 
-% --- Languages and Interests ---
-\section{Langues et Centres d'Intérêt}
-\noindent
-\begin{minipage}[t]{0.48\textwidth}
-    \textbf{Langues :}
-    \begin{itemize}[noitemsep, leftmargin=]
-        \item \textbf{Anglais :} Courant (C1/C2)
-        \item \textbf{Français :} Courant (C1/C2)
-        \item \textbf{Arabe :} Langue maternelle
-        \item \textbf{Russe :} Notions de base
-    \end{itemize}
-\end{minipage}
-\hfill
-\begin{minipage}[t]{0.48\textwidth}
-    \textbf{Centres d'intérêt :}
-    \begin{itemize}[noitemsep, leftmargin=]
-        \item {Dév. de Jeux Vidéo} (Unity/Unreal)
-        \item Esport : Joueur semi-pro (équipe INSA)
-        \item Taekwondo, Musculation
-    \end{itemize}
-\end{minipage}
+\textbf{AR/VR \& Dév :} Unity, C\#, Logique de jeu, UI/UX XR, Blender (bases).   \\
+\textbf{Langages \& Web :} Python, C++, Java, JavaScript (Node.js), Dart (Flutter), HTML/CSS.   \\
+\textbf{Data \& IA :} PyTorch, OpenCV, Hadoop (MapReduce), Vision par ordinateur, Détection d’objets.  \\
+\textbf{Outils \& DevOps :} Git/GitHub, Docker, Linux, Android Studio.
+
+% --- Projects ---
+\section{Projets Académiques}
+
+\project{Développement 3D/VR Avancé}{Unity, C\#}
+Conception d'une simulation immersive avec logique de combat avancée, IA ennemie et optimisation temps réel.
+
+\project{Vision par Ordinateur}{PyTorch, Python}
+Implémentation d’un CNN pour la reconnaissance de chiffres manuscrits et suivi AR.
+
+\project{Cryptomonnaie Personnalisée}{Python, Web3, FastAPI}
+Création d’un token blockchain et d’une interface Web ; démonstration de sécurité applicative.
+
+% --- Languages & Interests ---
+\section{Langues et Centres d'intérêt}
+
+\textbf{Langues :} Français (C1), Anglais (C1), Arabe (natif).  
+
+\textbf{Centres d’intérêt :}  
+Développement de jeux (Unity / Unreal Engine).  
+E-sport : joueur semi-pro (équipe INSA).
 
 \end{document}

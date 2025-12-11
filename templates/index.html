@@ -7,29 +7,61 @@
     <title>CV Adapter</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Simple additions for the status log */
+        #status-container {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .log-entry {
+            margin: 5px 0;
+            font-size: 0.9rem;
+            color: #e0e0e0;
+        }
+
+        .log-entry:last-child {
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .loader {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3498db;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
 </head>
 
 <body>
     <div class="container">
         <header>
             <h1>CV Adapter</h1>
-            <p>Tailor your LaTeX CV to any job description instantly.</p>
+            <p>the end of your problems, kind of</p>
         </header>
 
         <main>
-            {% with messages = get_flashed_messages() %}
-            {% if messages %}
-            <div class="flash-messages">
-                {% for message in messages %}
-                <div class="flash-message">{{ message }}</div>
-                {% endfor %}
-            </div>
-            {% endif %}
-            {% endwith %}
-
-            <form action="/" method="post" class="glass-form">
-                <!-- File upload removed, using hardcoded CV.tex -->
-
+            <form id="job-form" class="glass-form">
                 <div class="form-group">
                     <label for="job_description">Job Description</label>
                     <textarea name="job_description" id="job_description" rows="10"
@@ -41,10 +73,82 @@
                     <input type="email" name="email" id="email" placeholder="Enter your email to receive the PDF">
                 </div>
 
-                <button type="submit" class="btn-primary">Adapt & Send</button>
+                <button type="submit" id="submit-btn" class="btn-primary">Adapt & Send</button>
             </form>
+
+            <div id="status-container">
+                <h3><span class="loader"></span> Processing...</h3>
+                <div id="logs"></div>
+            </div>
         </main>
     </div>
+
+    <script>
+        document.getElementById('job-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const form = e.target;
+            const btn = document.getElementById('submit-btn');
+            const statusContainer = document.getElementById('status-container');
+            const logsDiv = document.getElementById('logs');
+
+            // Reset UI
+            btn.disabled = true;
+            btn.innerText = "Starting...";
+            statusContainer.style.display = 'block';
+            logsDiv.innerHTML = '';
+
+            const formData = new FormData(form);
+
+            try {
+                // Start Job
+                const response = await fetch('/start_job', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) throw new Error("Failed to start job");
+
+                const data = await response.json();
+                const jobId = data.job_id;
+
+                // Poll Status
+                const pollInterval = setInterval(async () => {
+                    const statusRes = await fetch(`/job_status/${jobId}`);
+                    const statusData = await statusRes.json();
+
+                    // Update Logs
+                    logsDiv.innerHTML = statusData.logs.map(log => `<div class="log-entry">➤ ${log}</div>`).join('');
+
+                    if (statusData.status === 'completed') {
+                        clearInterval(pollInterval);
+                        btn.innerText = "Done!";
+                        btn.disabled = false;
+
+                        // Auto-download CV
+                        window.location.href = `/download/${statusData.result.cv_pdf}`;
+
+                        // Add download link for Cover Letter if needed, or just show success
+                        const successMsg = document.createElement('div');
+                        successMsg.innerHTML = `<div class="log-entry" style="color: #4caf50;">✅ Success! Downloading CV...</div>`;
+                        logsDiv.appendChild(successMsg);
+
+                    } else if (statusData.status === 'failed') {
+                        clearInterval(pollInterval);
+                        btn.innerText = "Retry";
+                        btn.disabled = false;
+                        alert("Job Failed. Check logs.");
+                    }
+                }, 1000);
+
+            } catch (err) {
+                console.error(err);
+                alert("An error occurred: " + err.message);
+                btn.disabled = false;
+                btn.innerText = "Adapt & Send";
+            }
+        });
+    </script>
 </body>
 
 </html>

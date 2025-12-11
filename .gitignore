@@ -1,4 +1,8 @@
+
+# Environment variables
 .env
+
+# Python
 __pycache__/
 *.pyc
 instance/
@@ -7,4 +11,16 @@ instance/
 env/
 venv/
 *.log
+
+# Generated content
+uploads/
+outputs/
+*.pdf
+*.aux
+*.log
+*.out
+*.toc
+
+# User specific
 singleinquiry471704h92db50b0583fe.json
+master_cv.md
