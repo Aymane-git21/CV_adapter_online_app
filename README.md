@@ -1,46 +1,64 @@
-# CV_adapter_internship_getter_unemployement_finisher_v2000
+# CV Adapter Online App
 
-tired of getting rejected by your dream jobs and internships because your CV is “too much”?
-yeah. same.
+A powerful web application that tailors your LaTeX CV and generates professional cover letters based on specific job descriptions. This tool uses AI to analyze job requirements and adapt your experience to match, helping you stand out to recruiters and ATS (Applicant Tracking System) software.
 
-you’re not wrong for having 27 half-finished projects and a github graveyard full of “potential”.
-recruiters just don’t speak *passion-fueled chaos*.
+## Features
 
-so here’s the deal:
+-   **CV Tailoring**: Automatically rewrites your CV's bullet points to highlight skills and experiences relevant to the job description.
+-   **Cover Letter Generation**: Creates a personalized cover letter that aligns with the company's values and job requirements.
+-   **PDF Generation**: Compiles your tailored CV and cover letter into professional PDF documents using LaTeX.
+-   **ATS Scoring**: Provides an estimated ATS match score and suggests missing keywords.
+-   **History Tracking**: Keeps a record of all your applications for easy reference.
 
-drop your **generalist LaTeX CV (.tex)** and the **job description**, and this thing will spit out:
+## Prerequisites
 
-* a **tailored CV** that matches the role like it was *built for it*
-* a **cover letter** that sounds human, confident, and annoyingly “aligned with the company values”
+-   **Python 3.8+**
+-   **MiKTeX** (or another LaTeX distribution) with `pdflatex` available in your system PATH.
+-   **Google Gemini API Key**: You will need an API key from Google AI Studio.
 
-not so you don’t get rejected…
-but so you get rejected for the honest reason:
+## Installation
 
-**you’re not qualified.** 💀
+1.  **Clone the repository**:
+    ```bash
+    git clone https://github.com/YOUR_USERNAME/CV_adapter_online_app.git
+    cd CV_adapter_online_app
+    ```
 
-## what you need
+2.  **Install dependencies**:
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-* your current CV in LaTeX (`.tex`)
-* the job description (copy/paste or file)
+3.  **Set up environment variables**:
+    Create a `.env` file in the root directory and add your API key:
+    ```env
+    GEMINI_API_KEY=your_api_key_here
+    flask_secret_key=your_secret_key
+    ```
 
-## what you get
+## Usage
 
-* `cv_tailored.tex` (optionally PDF if you compile)
-* `cover_letter.txt` / `.tex`
+1.  **Start the application**:
+    ```bash
+    python app.py
+    ```
 
-## why this exists
+2.  **Open your browser**:
+    Navigate to `http://127.0.0.1:5000`.
 
-because “one CV fits all” is a lie recruiters tell to sleep at night.
+3.  **Upload & Generate**:
+    -   Upload your master CV (in LaTeX format) or paste the text.
+    -   Paste the Job Description.
+    -   Click "Start Adaptation".
 
-## warning
+## Project Structure
 
-* this tool won’t invent experience. it’ll just weaponize what you already did.
-* read the output before you send it unless you enjoy self-sabotage.
+-   `app.py`: Main Flask application.
+-   `templates/`: HTML templates for the web interface.
+-   `static/`: CSS and Client-side JavaScript.
+-   `CV.tex` & `CoverLetter.tex`: LaTeX templates used for generation.
+-   `uploads/` & `outputs/`: Directories for handling files.
 
-## usage (probably)
+## License
 
-```bash
-python main.py --cv cv.tex --jd jd.txt --out out/
-```
-
-have fun. go get that internship BIG BOY (or GIRL, we dont judge)
+[MIT License](LICENSE)
